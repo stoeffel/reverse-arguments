@@ -1,6 +1,13 @@
-module.exports = function reverseArgs(fn, scope) {
-  return function(/*args*/) {
-    var args = Array.prototype.slice.call(arguments);
-    return fn.apply(scope || this, args.reverse());
+"use strict";
+
+var reverseArgs = function (fn, scope) {
+  return function () {
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return fn.apply(scope || undefined, args.reverse());
   };
 };
+
+module.exports = reverseArgs;
